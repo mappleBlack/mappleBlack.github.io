@@ -16,18 +16,18 @@
   <meta name="author" content="HuGang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="是什么一句话概括：并发编程中既然可以多线程操作共享资源，那么也会有线程之间资源隔离，每个线程只能访问自己的数据不能访问别的线程中的数据。Synchronized用于多线程间的数据共享，而ThreadLocal则用于线程间的数据隔离，通过ThreadLocal在同一线程不同组件中传递公共变量。 前置知识Java中的4种引用类型-强软弱虚 强引用JVM进行GC垃圾回收的时候针对强引用对象是不会被回收的">
+    <meta name="description" content="是什么一句话概括：并发编程中既然可以多线程操作共享资源，那么也会有线程之间资源隔离，每个线程只能访问自己的数据不能访问别的线程中的数据。Synchronized用于多线程间的数据共享，而ThreadLocal则用于线程间的数据隔离，通过ThreadLocal在同一线程不同组件中传递公共变量。 前置知识Java中的4种引用类型-强软弱虚 强引用JVM进行GC垃圾回收的时候针对强引用对象是不会被回">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ali-前置知识-线程局部变量">
 <meta property="og:url" content="https://mappleblack.github.io/2023/01/30/Ali-%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86-%E7%BA%BF%E7%A8%8B%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F/index.html">
 <meta property="og:site_name" content="日拱一卒，功不唐捐">
-<meta property="og:description" content="是什么一句话概括：并发编程中既然可以多线程操作共享资源，那么也会有线程之间资源隔离，每个线程只能访问自己的数据不能访问别的线程中的数据。Synchronized用于多线程间的数据共享，而ThreadLocal则用于线程间的数据隔离，通过ThreadLocal在同一线程不同组件中传递公共变量。 前置知识Java中的4种引用类型-强软弱虚 强引用JVM进行GC垃圾回收的时候针对强引用对象是不会被回收的">
+<meta property="og:description" content="是什么一句话概括：并发编程中既然可以多线程操作共享资源，那么也会有线程之间资源隔离，每个线程只能访问自己的数据不能访问别的线程中的数据。Synchronized用于多线程间的数据共享，而ThreadLocal则用于线程间的数据隔离，通过ThreadLocal在同一线程不同组件中传递公共变量。 前置知识Java中的4种引用类型-强软弱虚 强引用JVM进行GC垃圾回收的时候针对强引用对象是不会被回">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/mapple333/obsidian_server/raw/master/202301301435634.png">
 <meta property="og:image" content="https://gitee.com/mapple333/obsidian_server/raw/master/202301301435659.png">
 <meta property="og:image" content="https://gitee.com/mapple333/obsidian_server/raw/master/202301301435689.png">
 <meta property="article:published_time" content="2023-01-30T06:44:07.000Z">
-<meta property="article:modified_time" content="2023-01-30T07:01:18.621Z">
+<meta property="article:modified_time" content="2023-01-30T08:47:06.937Z">
 <meta property="article:author" content="HuGang">
 <meta property="article:tag" content="java笔记">
 <meta name="twitter:card" content="summary_large_image">
@@ -278,7 +278,9 @@
             
               <div class="markdown-body">
                 
-                <h1 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a><strong>是什么</strong></h1><p>一句话概括：并发编程中既然可以多线程操作共享资源，那么也会有线程之间资源隔离，每个线程只能访问自己的数据不能访问别的线程中的数据。Synchronized用于多线程间的数据共享，而ThreadLocal则用于线程间的数据隔离，通过ThreadLocal在同一线程不同组件中传递公共变量。</p>
+                <meta name="referrer" content="no-referrer"/>
+
+<h1 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a><strong>是什么</strong></h1><p>一句话概括：并发编程中既然可以多线程操作共享资源，那么也会有线程之间资源隔离，每个线程只能访问自己的数据不能访问别的线程中的数据。Synchronized用于多线程间的数据共享，而ThreadLocal则用于线程间的数据隔离，通过ThreadLocal在同一线程不同组件中传递公共变量。</p>
 <h1 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a><strong>前置知识</strong></h1><p>Java中的4种引用类型-强软弱虚</p>
 <h2 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a><strong>强引用</strong></h2><p>JVM进行GC垃圾回收的时候针对强引用对象是不会被回收的，在Java中最常见的就是强引用，把一个对象赋值给一个引用变量，这个引用变量就是一个强引用。当一个对象被强引用对象应用时，它处于可达状态，它是不可能被垃圾回收机制回收的，即使该对象永远都不会被用到JVM也不会回收。如果堆内存不足时那么就会出现OOM（内存溢出）。一般来说我们创建的对象都是强引用对象。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">StrongReferenceDemo</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">Object</span> <span class="hljs-variable">obj1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>(); <span class="hljs-comment">//这样的定义默认就是强引用</span><br>        <span class="hljs-type">Object</span> <span class="hljs-variable">obj2</span> <span class="hljs-operator">=</span> obj1; <span class="hljs-comment">//obj2引用赋值</span><br>        obj1=<span class="hljs-literal">null</span>; <span class="hljs-comment">//置空</span><br>        System.gc(); <span class="hljs-comment">//触发gc</span><br>        System.out.println(obj1); <span class="hljs-comment">//obj1</span><br>        System.out.println(obj2); <span class="hljs-comment">//obj2依然还存在</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
