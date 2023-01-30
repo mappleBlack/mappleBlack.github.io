@@ -16,18 +16,18 @@
   <meta name="author" content="HuGang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="功能：在运行中分析类的能力简单说就是：只要给定类的名字，那么就可以通过反射机制来获得类的所有信息。 Class类java运行时系统始终为所有对象维护一个被称为运行时的类型标识。这个信息跟踪每一个对象所属的类。虚拟机利用运行时类型信息选择相应的方法执行。 保存这些信息的类称为Class。 1.Class的特点（1）没有公共构造方法，Class对象是加载类时由虚拟机以及调用类加载器中的defineCl">
+    <meta name="description" content="功能：在运行中分析类的能力简单说就是：只要给定类的名字，那么就可以通过反射机制来获得类的所有信息。 Class类java运行时系统始终为所有对象维护一个被称为运行时的类型标识。这个信息跟踪每一个对象所属的类。虚拟机利用运行时类型信息选择相应的方法执行。 保存这些信息的类称为Class。 1.Class的特点（1）没有公共构造方法，Class对象是加载类时由虚拟机以及调用类加载器中的define">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ali-前置知识-反射">
 <meta property="og:url" content="https://mappleblack.github.io/2023/01/30/Ali-%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86-%E5%8F%8D%E5%B0%84/index.html">
 <meta property="og:site_name" content="日拱一卒，功不唐捐">
-<meta property="og:description" content="功能：在运行中分析类的能力简单说就是：只要给定类的名字，那么就可以通过反射机制来获得类的所有信息。 Class类java运行时系统始终为所有对象维护一个被称为运行时的类型标识。这个信息跟踪每一个对象所属的类。虚拟机利用运行时类型信息选择相应的方法执行。 保存这些信息的类称为Class。 1.Class的特点（1）没有公共构造方法，Class对象是加载类时由虚拟机以及调用类加载器中的defineCl">
+<meta property="og:description" content="功能：在运行中分析类的能力简单说就是：只要给定类的名字，那么就可以通过反射机制来获得类的所有信息。 Class类java运行时系统始终为所有对象维护一个被称为运行时的类型标识。这个信息跟踪每一个对象所属的类。虚拟机利用运行时类型信息选择相应的方法执行。 保存这些信息的类称为Class。 1.Class的特点（1）没有公共构造方法，Class对象是加载类时由虚拟机以及调用类加载器中的define">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/mapple333/obsidian_server/raw/master/202301301435410.png">
 <meta property="og:image" content="https://gitee.com/mapple333/obsidian_server/raw/master/202301301435428.png">
 <meta property="og:image" content="https://gitee.com/mapple333/obsidian_server/raw/master/202301301435468.png">
 <meta property="article:published_time" content="2023-01-30T06:43:38.000Z">
-<meta property="article:modified_time" content="2023-01-30T07:00:35.206Z">
+<meta property="article:modified_time" content="2023-01-30T08:42:13.268Z">
 <meta property="article:author" content="HuGang">
 <meta property="article:tag" content="java笔记">
 <meta name="twitter:card" content="summary_large_image">
@@ -278,7 +278,9 @@
             
               <div class="markdown-body">
                 
-                <h1 id="功能：在运行中分析类的能力"><a href="#功能：在运行中分析类的能力" class="headerlink" title="功能：在运行中分析类的能力"></a>功能：在运行中分析类的能力</h1><p>简单说就是：只要给定类的名字，那么就可以通过反射机制来获得类的所有信息。</p>
+                <meta name="referrer" content="no-referrer"/>
+
+<h1 id="功能：在运行中分析类的能力"><a href="#功能：在运行中分析类的能力" class="headerlink" title="功能：在运行中分析类的能力"></a>功能：在运行中分析类的能力</h1><p>简单说就是：只要给定类的名字，那么就可以通过反射机制来获得类的所有信息。</p>
 <h2 id="Class类"><a href="#Class类" class="headerlink" title="Class类"></a>Class类</h2><p>java运行时系统始终为所有对象维护一个被称为运行时的类型标识。这个信息跟踪每一个对象所属的类。虚拟机利用运行时类型信息选择相应的方法执行。</p>
 <p>保存这些信息的类称为Class。</p>
 <h3 id="1-Class的特点"><a href="#1-Class的特点" class="headerlink" title="1.Class的特点"></a>1.Class的特点</h3><p>（1）没有公共构造方法，Class对象是加载类时由虚拟机以及调用类加载器中的defineClass方法构造的，不能显式声明。<br>（2）每种类型都有唯一一个Class对象。<br>（3）基本类型（int、long、short、float、double、char、byte、boolean）以及void也都对应一个class对象。<br>（4）相同元素类型和维数的数组拥有同一个class对象。</p>
